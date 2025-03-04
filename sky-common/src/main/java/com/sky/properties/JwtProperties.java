@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "sky.jwt")
 @Data
+//配置属性类  把application.yml 配置文件中的配置项封装成java对象 然后注入给controller
 public class JwtProperties {
 
     /**

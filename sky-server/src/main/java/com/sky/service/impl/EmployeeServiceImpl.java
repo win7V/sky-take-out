@@ -79,10 +79,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         //对象属性拷贝 从employeeDTO 拷贝到 employee  前提是属性名一致
         BeanUtils.copyProperties(employeeDTO,employee);
 
-        //设置账号状态  默认正常状态 1表示正常  0表示锁定
+        //设置账号状态  默认正常状态 1表示正常  0表示锁定 用常量类而不是硬编码
         employee.setStatus(StatusConstant.ENABLE);
 
-        //设置密码 默认密码123456
+        //设置密码 默认密码123456  但是需要将密码进行md5加密后再存到数据库中
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
         //设置当前记录的创建时间和修改时间
@@ -114,5 +114,27 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> records = page.getResult();
 
         return new PageResult(total, records);
+    }
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // update employ set status = ? where id = ?
+
+//        Employee employee = new Employee();
+//        employee.setId(id);
+//        employee.setStatus(status);
+
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+
+
+        employeeMapper.update(employee);
     }
 }
