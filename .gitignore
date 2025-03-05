@@ -4,3 +4,7 @@
 *.class
 *Test.java
 **/test/
+
+# 忽略敏感配置文件
+application.yml
+application-dev.yml
