@@ -30,9 +30,7 @@ public class AutoFillAspect {
      */
     //拦截mapper下面所有的类所有的方法  同时 还要满足该方法加入了AutoFill注解
     @Pointcut("execution(* com.sky.mapper.*.*(..)) && @annotation(com.sky.annotation.AutoFill)")
-    public void autoFillPointCut() {
-
-    }
+    public void autoFillPointCut() {}
 
     /**
      * 前置通知 在通知中进行公共字段的赋值
